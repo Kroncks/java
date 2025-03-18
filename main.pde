@@ -178,7 +178,8 @@ class Silence {
 ArrayList<Note> notes;
 ArrayList<Silence> silences;
 color[] couleurs = {color(0, 0, 255), color(255, 0, 255), color(255, 0, 0), color(255, 150, 0), color(255, 255, 0), color(200, 225, 0), color(0, 255, 0), color(100, 255, 255)};
-int[] partition = {1, 2, 3, 4, 0, 0, 0, 0, 7, 8, 1, 2, 1, 1, 1, 1, 2, 3, 4, 5, 6, 7, 8};
+//                /                       /                       /                       /                       /                       /                       /
+int[] partition = {0, 0, 3, 3, 6, 6, 3, 3, 3, 3, 1, 4, 3, 3, 1, 1, 0, 0, 3, 3, 6, 6, 3, 3, 3, 3, 1, 4, 3, 3, 1, 1, 0, 0, 3, 3, 6, 6, 3, 3, 3, 3, 1, 4, 3, 3, 1, 1};
 
 void setup() {
   fullScreen();
