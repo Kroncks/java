@@ -1,9 +1,10 @@
 import java.util.ArrayList;
 
-final float ECART = 0.25; // Constante
+final float ECART = 0.1; // Constante
 final float RAYON = 0.25; // rapport hauteur rayon
+final float TAILLE = 0.2; // proportion taille PAS SUR 100%
 final float VITESSE = 0.02;
-int fin=0;
+int fin=1;
 int joue=0;
 
 class Note {
@@ -31,7 +32,7 @@ class Note {
     if (actif!=0){
       dist -= dist * VITESSE;
       
-      if (actif == 1 && dist*(1+taille) < y){
+      if (actif == 1 && dist*(1+taille*TAILLE) < y){
         actif=2;
         if (joue+1!=partition.length)
           joue++;
@@ -43,7 +44,7 @@ class Note {
         return;
       }
       
-      if (actif == 3 && dist*(1+taille) < y * RAYON){
+      if (actif == 3 && dist*(1+taille*TAILLE) < y * RAYON){
         actif=0;
         if (joue+1==partition.length)
           fin=1;
@@ -61,10 +62,10 @@ class Note {
       x2 = sqrt(17/16.0) * dist * cos(angle - atan(ECART));
       y2 = sqrt(17/16.0) * dist * sin(angle - atan(ECART));
       
-      x3 = sqrt(17/16.0) * dist * (1 + taille) * cos(angle - atan(ECART));
-      y3 = sqrt(17/16.0) * dist * (1 + taille) * sin(angle - atan(ECART));
-      x4 = sqrt(17/16.0) * dist * (1 + taille) * cos(angle + atan(ECART));
-      y4 = sqrt(17/16.0) * dist * (1 + taille) * sin(angle + atan(ECART));
+      x3 = sqrt(17/16.0) * dist * (1 + taille*TAILLE) * cos(angle - atan(ECART));
+      y3 = sqrt(17/16.0) * dist * (1 + taille*TAILLE) * sin(angle - atan(ECART));
+      x4 = sqrt(17/16.0) * dist * (1 + taille*TAILLE) * cos(angle + atan(ECART));
+      y4 = sqrt(17/16.0) * dist * (1 + taille*TAILLE) * sin(angle + atan(ECART));
       
       x1 += x; x2 += x; x3 += x; x4 += x;
       y1 += y; y2 += y; y3 += y; y4 += y;
@@ -90,6 +91,7 @@ class Note {
       stroke(255);
       strokeWeight(1);
       ellipse(x+cos(angle)*y*RAYON*0.85, y+sin(angle)*y*RAYON*0.85, y*RAYON*0.65, y*RAYON*0.65);
+      ellipse(x, y, y*RAYON*0.75, y*RAYON*0.75);
     } else {
       fill(lerpColor(col, color(0, 0, 0), 0.3));
       noStroke();
@@ -115,7 +117,7 @@ class Silence {
     if (actif!=0){
       dist -= dist * VITESSE;
       
-      if (actif == 1 && dist*(1+taille) < y){
+      if (actif == 1 && dist*(1+taille*TAILLE) < y){
         actif=2;
         if (joue+1!=partition.length)
           joue++;
@@ -127,7 +129,7 @@ class Silence {
         return;
       }
       
-      if (actif == 3 && dist*(1+taille) < y * RAYON){
+      if (actif == 3 && dist*(1+taille*TAILLE) < y * RAYON){
         actif=0;
         if (joue+1==partition.length)
           fin=1;
@@ -165,6 +167,11 @@ void draw() {
   background(0);
   float x = width/2;
   float y = height/2;
+  
+  if(fin == 1 && mousePressed){
+    joue=0;
+    fin=0;
+  }
  
   // Arrière-plan (cercle en dégradé)
   int diametre = height;
@@ -202,6 +209,8 @@ void draw() {
   fill(80);
   noStroke();
   ellipse(x, y, height*RAYON, height*RAYON);
+  fill(50);
+  ellipse(x, y, y*RAYON*0.75, y*RAYON*0.75);
   
   for (Note n : notes) {
     n.touche();
