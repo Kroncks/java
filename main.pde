@@ -3,7 +3,7 @@ import java.util.ArrayList;
 final float ECART = 0.1; 
 final float RAYON = 0.25;
 final float TAILLE = 0.2; 
-final float VITESSE = 0.02;
+final float VITESSE = 0.01;
 
 int fin = 1;
 int joue = 0;
@@ -189,7 +189,7 @@ void setup() {
 }
 
 void draw() {
-  background(0);
+  background(45);
   float x = width / 2;
   float y = height / 2;
 
