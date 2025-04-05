@@ -193,6 +193,7 @@ color[] couleurs = {color(0, 0, 255), color(255, 0, 255), color(255, 0, 0), colo
 int[] partition = {0, 0, 3, 3, 6, 6, 3, 3, 3, 3, 1, 4, 3, 3, 1, 1, 0, 0, 3, 3, 6, 6, 3, 3, 3, 3, 1, 4, 3, 3, 1, 1, 0, 0, 3, 3, 6, 6, 3, 3, 3, 3, 1, 4, 3, 3, 1, 1};
 
 void setup() {
+  frameRate(60);
   fullScreen();
   background(255);
   notes = new ArrayList<Note>();
