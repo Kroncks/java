@@ -1,5 +1,10 @@
 import java.util.ArrayList;
 
+import processing.serial.*;
+
+Serial arduinoPort;
+float incomingFreq =-1.0;
+
 final float ECART = 0.1; 
 final float RAYON = 0.25;
 final float TAILLE = 0.2; 
@@ -7,6 +12,10 @@ final float VITESSE = 0.01;
 
 int fin = 1;
 int joue = 0;
+
+//                     do      re     mi     fa    sol     la     si     do
+float[] frequences = {257.7, 289.4, 330.0, 353.1, 392.2, 441.5, 495.5, 523.2};
+
 
 class Note {
   int num;
@@ -108,11 +117,13 @@ class Note {
 
   void touche() {
     if (actif == 3) {
-      fill(col);
-      stroke(255);
-      strokeWeight(1);
-      ellipse(x + cos(angle) * y * RAYON * 0.85, y + sin(angle) * y * RAYON * 0.85, y * RAYON * 0.65, y * RAYON * 0.65);
-      ellipse(x, y, y * RAYON * 0.75, y * RAYON * 0.75);
+        if(abs(incomingFreq-frequences[num-1])<20){
+          fill(col);
+          stroke(255);
+          strokeWeight(1);
+          ellipse(x + cos(angle) * y * RAYON * 0.85, y + sin(angle) * y * RAYON * 0.85, y * RAYON * 0.65, y * RAYON * 0.65);
+          ellipse(x, y, y * RAYON * 0.75, y * RAYON * 0.75);
+      }
     }
   }
 }
@@ -186,6 +197,10 @@ void setup() {
   background(255);
   notes = new ArrayList<Note>();
   silences = new ArrayList<Silence>();
+  // Connexion :
+  printArray(Serial.list()); // Liste les ports
+  arduinoPort = new Serial(this, Serial.list()[4], 9600); 
+  arduinoPort.bufferUntil('\n'); 
 }
 
 void draw() {
@@ -254,5 +269,12 @@ void draw() {
 
   for (Note n : notes) {
     n.touche();
+  }
+}
+
+void serialEvent(Serial port) {
+  String line = port.readStringUntil('\n');
+  if (line != null) {
+    incomingFreq = Float.parseFloat(trim(line)); // Enlève les retours à la ligne
   }
 }
