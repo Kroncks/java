@@ -198,6 +198,7 @@ void setup() {
   frameRate(FPS);
   fullScreen();
   background(255);
+  noCursor();
   notes = new ArrayList<Note>();
   silences = new ArrayList<Silence>();
   // Connexion :
