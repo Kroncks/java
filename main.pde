@@ -8,7 +8,9 @@ float incomingFreq =-1.0;
 final float ECART = 0.1; 
 final float RAYON = 0.25;
 final float TAILLE = 0.2; 
-final float VITESSE = 0.01;
+final float VITESSE = 0.012;
+
+final int FPS = 30;
 
 int fin = 1;
 int joue = 0;
@@ -193,7 +195,7 @@ color[] couleurs = {color(0, 0, 255), color(255, 0, 255), color(255, 0, 0), colo
 int[] partition = {0, 0, 3, 3, 6, 6, 3, 3, 3, 3, 1, 4, 3, 3, 1, 1, 0, 0, 3, 3, 6, 6, 3, 3, 3, 3, 1, 4, 3, 3, 1, 1, 0, 0, 3, 3, 6, 6, 3, 3, 3, 3, 1, 4, 3, 3, 1, 1};
 
 void setup() {
-  frameRate(60);
+  frameRate(FPS);
   fullScreen();
   background(255);
   notes = new ArrayList<Note>();
