@@ -202,7 +202,7 @@ void setup() {
   silences = new ArrayList<Silence>();
   // Connexion :
   printArray(Serial.list()); // Liste les ports
-  arduinoPort = new Serial(this, Serial.list()[4], 9600); 
+  arduinoPort = new Serial(this, Serial.list()[0], 9600); 
   arduinoPort.bufferUntil('\n'); 
 }
 
