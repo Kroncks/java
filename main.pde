@@ -119,7 +119,7 @@ class Note {
 
   void touche() {
     if (actif == 3) {
-        if(abs(incomingFreq-frequences[num-1])<20){
+        if(abs(incomingFreq-frequences[num-1])<25){
           fill(col);
           stroke(255);
           strokeWeight(1);
