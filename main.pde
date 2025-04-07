@@ -221,13 +221,17 @@ void draw() {
   for (int val : points) {
     somme += val;
   }
-  int moyenne = somme * 100 / points.size();
-  if (points.size()==0) moyenne=0;
+  int moyenne;
+  if (points.size()==0)
+  moyenne=0;
+  else
+  moyenne = somme * 100 / points.size();
+  
   
   fill(0, 120, 100);
   textSize(y/5);
   text(moyenne + " %", y/10, y/5);
-s
+
 
 
   if (fin == 1 && mousePressed) {
