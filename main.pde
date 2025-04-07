@@ -217,17 +217,17 @@ void draw() {
   float x = width / 2;
   float y = height / 2;
 
-  float somme = 0;
+  int somme = 0;
   for (int val : points) {
     somme += val;
   }
-  float moyenne = somme / points.size();
+  int moyenne = somme * 100 / points.size();
   if (points.size()==0) moyenne=0;
   
   fill(0, 120, 100);
   textSize(y/5);
-  text(nf(moyenne, 0, 2) + " %", y/10, y/5);
-
+  text(moyenne + " %", y/10, y/5);
+s
 
 
   if (fin == 1 && mousePressed) {
