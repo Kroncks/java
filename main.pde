@@ -76,6 +76,7 @@ class Note {
       
       if (actif == 2 && dist < y * RAYON) {
         actif = 3;
+        points.add(0);
         return;
       }
       
@@ -120,6 +121,7 @@ class Note {
   void touche() {
     if (actif == 3) {
         if(abs(incomingFreq-frequences[num-1])<25){
+          points.set((points.size() - 1), 1);
           fill(col);
           stroke(255);
           strokeWeight(1);
@@ -194,6 +196,8 @@ color[] couleurs = {color(0, 0, 255), color(255, 0, 255), color(255, 0, 0), colo
 //                /                       /                       /                       /                       /                       /                       /
 int[] partition = {0, 0, 3, 3, 0, 6, 6, 0, 3, 3, 3, 3, 0, 1, 0, 4, 0, 3, 3, 0, 1, 1, 0, 0, 3, 3, 0, 6, 6, 0, 3, 3, 3, 3, 0, 1, 0, 4, 0, 3, 3, 0, 1, 1, 0, 0, 3, 3, 0, 6, 6, 0, 3, 3, 3, 3, 0, 1, 0, 4, 0, 3, 3, 0, 1, 1};
 
+ArrayList<Integer> points;
+
 void setup() {
   frameRate(FPS);
   fullScreen();
@@ -201,6 +205,7 @@ void setup() {
   noCursor();
   notes = new ArrayList<Note>();
   silences = new ArrayList<Silence>();
+  points = new ArrayList<Integer>();
   // Connexion :
   printArray(Serial.list()); // Liste les ports
   arduinoPort = new Serial(this, Serial.list()[0], 9600); 
@@ -212,7 +217,21 @@ void draw() {
   float x = width / 2;
   float y = height / 2;
 
+  float somme = 0;
+  for (int val : points) {
+    somme += val;
+  }
+  float moyenne = somme / points.size();
+  if (points.size()==0) moyenne=0;
+  
+  fill(0, 120, 100);
+  textSize(y/5);
+  text(nf(moyenne, 0, 2) + " %", y/10, y/5);
+
+
+
   if (fin == 1 && mousePressed) {
+    points.clear();
     joue = 0;
     fin = 0;
     if (partition[joue]==0){
