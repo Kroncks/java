@@ -16,7 +16,7 @@ int fin = 1;
 int joue = 0;
 
 //                     do      re     mi     fa    sol     la     si     do
-float[] frequences = {257.7, 289.4, 330.0, 353.1, 392.2, 441.5, 495.5, 523.2};
+float[] frequences = {261.0, 289.0, 331.0, 346.0, 390.0, 441.5, 492.0, 522.0};
 
 
 class Note {
