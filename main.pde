@@ -8,7 +8,7 @@ float incomingFreq =-1.0;
 final float ECART = 0.1; 
 final float RAYON = 0.25;
 final float TAILLE = 0.2; 
-final float VITESSE = 0.012;
+final float VITESSE = 0.015;
 
 final int FPS = 30;
 
