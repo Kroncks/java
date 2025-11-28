@@ -15,8 +15,12 @@ final int FPS = 30;
 int fin = 1;
 int joue = 0;
 
+
+// https://www.deleze.name/marcel/physique/musique/GammeTemperee.html ==> Octave 3
 //                     do      re     mi     fa    sol     la     si     do
-float[] frequences = {250.0, 280.0, 320.0, 333.0, 377.0, 425.0, 476.0, 505.0};
+float[] frequences = {261.6, 293.7, 329.6, 349.2, 392.0, 440.0, 493.9, 523.3};
+
+//float[] frequences = {250.0, 280.0, 320.0, 333.0, 377.0, 425.0, 476.0, 505.0}; <-- old
 
 
 class Note {
